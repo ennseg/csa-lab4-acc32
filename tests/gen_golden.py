@@ -29,7 +29,7 @@ LOG_TAIL = 20
 PROGRAMS = {
     "hello": "",
     "cat": "cat",
-    "hello_user_name": "Bob",
+    "hello_user_name": "Egor",
     "sort": "",
     "add64": "",
     "prob2": "",

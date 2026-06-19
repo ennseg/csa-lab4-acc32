@@ -4,7 +4,7 @@ variable bufpos
 variable bufaddr
 variable ch
 : store-char
-  200 bufpos @ + bufaddr !
+  300 bufpos @ + bufaddr !
   ch @ bufaddr @ !
   bufpos @ 1 + bufpos !
 ;
@@ -13,7 +13,7 @@ variable i2
   72 emit 101 emit 108 emit 108 emit 111 emit 44 emit 32 emit
   0 i2 !
   BEGIN
-    200 i2 @ + bufaddr !
+    300 i2 @ + bufaddr !
     bufaddr @ @ emit
     i2 @ 1 + i2 !
     i2 @ bufpos @ =

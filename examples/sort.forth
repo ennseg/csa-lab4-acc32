@@ -11,7 +11,7 @@ variable bufptr
   BEGIN
     num @ 10 / temp !
     num @ temp @ 10 * - digit !
-    100 count @ + bufptr !
+    500 count @ + bufptr !
     digit @ bufptr @ !
     temp @ num !
     count @ 1 + count !
@@ -20,7 +20,7 @@ variable bufptr
 : print-digits
   BEGIN
     count @ 1 - count !
-    100 count @ + bufptr !
+    500 count @ + bufptr !
     bufptr @ @ 48 +
     emit
     count @ 0 =

@@ -49,7 +49,7 @@ class Translator:
         self.word_addrs = {}
         self.constants = {}
         self.data_section = []
-        self.data_ptr = 0
+        self.data_ptr = config.DATA_BASE
         self.stack_depth = 0
         self.patches = []
 

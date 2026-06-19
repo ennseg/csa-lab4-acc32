@@ -11,22 +11,22 @@ source: |
   irq-handler set-irq-handler
   BEGIN 0 UNTIL
 input: cat
-output: c
+output: "cat\0"
 machine_code: |
   0000 - 68000002 - JMP 2  ; IP <- 2
   0001 - 68000011 - JMP 17  ; IP <- 17
-  0002 - 100007D0 - STORE 2000  ; mem[2000] <- AC
+  0002 - 10000000 - STORE 0  ; mem[0] <- AC
   0003 - B0000000 - IN 0  ; AC <- port[0]
-  0004 - 100007D1 - STORE 2001  ; mem[2001] <- AC
-  0005 - 0A000000 - LOAD #0  ; AC <- #0
-  0006 - 10000898 - STORE 2200  ; mem[2200] <- AC
-  0007 - 080007D1 - LOAD 2001  ; AC <- mem[2001]
-  0008 - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC
-  0009 - 080007D0 - LOAD 2000  ; AC <- mem[2000]
-  000A - 100007D0 - STORE 2000  ; mem[2000] <- AC
-  000B - 0A000000 - LOAD #0  ; AC <- #0
-  000C - 10000898 - STORE 2200  ; mem[2200] <- AC
-  000D - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]
+  0004 - 10000001 - STORE 1  ; mem[1] <- AC
+  0005 - 0A0000CB - LOAD #203  ; AC <- #203
+  0006 - 100000C8 - STORE 200  ; mem[200] <- AC
+  0007 - 08000001 - LOAD 1  ; AC <- mem[1]
+  0008 - 140000C8 - STORE @200  ; mem[mem[200]] <- AC
+  0009 - 08000000 - LOAD 0  ; AC <- mem[0]
+  000A - 10000000 - STORE 0  ; mem[0] <- AC
+  000B - 0A0000CB - LOAD #203  ; AC <- #203
+  000C - 100000C8 - STORE 200  ; mem[200] <- AC
+  000D - 0C0000C8 - LOAD @200  ; AC <- mem[mem[200]]
   000E - B8000001 - OUT 1  ; port[1] <- AC
   000F - C0000000 - IRET 0  ; interrupt return
   0010 - A8000000 - RET 0  ; return
@@ -54,24 +54,24 @@ log: |-
   tick=  18 | FETCH   | signal: INSTRUCTION_MEM_READ[17] = 0x0a000000 latch_IR <- 167772160                                                    | IP=  17 | IR=0x0a000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
   tick=  19 | DECODE  | signal: IP_MUX(IP_INC) -> 18 latch_IP <- 18  decode: LOAD mode=IMM operand=0                                           | IP=  18 | IR=0x0a000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
   tick=  20 | EXECUTE | signal: DR_MUX(IR_OPERAND) -> 0 latch_DR <- 0                                                                          | IP=  18 | IR=0x0a000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
-  ... [РїСЂРѕРїСѓС‰РµРЅРѕ 343 С‚Р°РєС‚РѕРІ] ...
-  tick= 364 | EXECUTE | signal: MEM_READ[2200] = 0  | DR_MUX(MEM) -> 0 latch_DR <- 0                                                           | IP=  14 | IR=0x0c000898 | AC=         0 | AR=2200 | DR=         0 | SP=4094 | N=0 Z=1 V=0 C=0 IE=0 [IRQ]
-  tick= 365 | EXECUTE | signal: AR_MUX(DR) -> 0 latch_AR <- 0                                                                                  | IP=  14 | IR=0x0c000898 | AC=         0 | AR=   0 | DR=         0 | SP=4094 | N=0 Z=1 V=0 C=0 IE=0 [IRQ]
-  tick= 366 | EXECUTE | signal: MEM_READ[0] = 99  | DR_MUX(MEM) -> 99 latch_DR <- 99                                                           | IP=  14 | IR=0x0c000898 | AC=         0 | AR=   0 | DR=        99 | SP=4094 | N=0 Z=1 V=0 C=0 IE=0 [IRQ]
-  tick= 367 | EXECUTE | signal: AC_MUX(AC) -> 0 latch_AC <- 99                                                                                 | IP=  14 | IR=0x0c000898 | AC=        99 | AR=   0 | DR=        99 | SP=4094 | N=0 Z=0 V=0 C=0 IE=0 [IRQ]
-  tick= 368 | FETCH   | signal: INSTRUCTION_MEM_READ[14] = 0xb8000001 latch_IR <- 3087007745                                                   | IP=  14 | IR=0xb8000001 | AC=        99 | AR=   0 | DR=        99 | SP=4094 | N=0 Z=0 V=0 C=0 IE=0 [IRQ]
-  tick= 369 | DECODE  | signal: IP_MUX(IP_INC) -> 15 latch_IP <- 15  decode: OUT mode=DIRECT operand=1                                         | IP=  15 | IR=0xb8000001 | AC=        99 | AR=   0 | DR=        99 | SP=4094 | N=0 Z=0 V=0 C=0 IE=0 [IRQ]
-  tick= 370 | EXECUTE | signal: AC_MUX(AC) -> 99  | IO_WRITE port[1] = 'c'                                                                     | IP=  15 | IR=0xb8000001 | AC=        99 | AR=   0 | DR=        99 | SP=4094 | N=0 Z=0 V=0 C=0 IE=0 [IRQ]
-  tick= 371 | FETCH   | signal: INSTRUCTION_MEM_READ[15] = 0xc0000000 latch_IR <- 3221225472                                                   | IP=  15 | IR=0xc0000000 | AC=        99 | AR=   0 | DR=        99 | SP=4094 | N=0 Z=0 V=0 C=0 IE=0 [IRQ]
-  tick= 372 | DECODE  | signal: IP_MUX(IP_INC) -> 16 latch_IP <- 16  decode: IRET mode=DIRECT operand=0                                        | IP=  16 | IR=0xc0000000 | AC=        99 | AR=   0 | DR=        99 | SP=4094 | N=0 Z=0 V=0 C=0 IE=0 [IRQ]
-  tick= 373 | EXECUTE | signal: SP_MUX(SP_INC) -> 4095 latch_SP <- 4095                                                                        | IP=  16 | IR=0xc0000000 | AC=        99 | AR=   0 | DR=        99 | SP=4095 | N=0 Z=0 V=0 C=0 IE=0 [IRQ]
-  tick= 374 | EXECUTE | signal: AR_MUX(SP) -> 4095 latch_AR <- 4095                                                                            | IP=  16 | IR=0xc0000000 | AC=        99 | AR=4095 | DR=        99 | SP=4095 | N=0 Z=0 V=0 C=0 IE=0 [IRQ]
-  tick= 375 | EXECUTE | signal: MEM_READ[4095] = 18  | DR_MUX(MEM) -> 18 latch_DR <- 18                                                        | IP=  16 | IR=0xc0000000 | AC=        99 | AR=4095 | DR=        18 | SP=4095 | N=0 Z=0 V=0 C=0 IE=0 [IRQ]
-  tick= 376 | EXECUTE | signal: IP_MUX(DR) -> 18 latch_IP <- 18                                                                                | IP=  18 | IR=0xc0000000 | AC=        99 | AR=4095 | DR=        18 | SP=4095 | N=0 Z=0 V=0 C=0 IE=0 [IRQ]
-  tick= 377 | EXECUTE | signal:                                                                                                                | IP=  18 | IR=0xc0000000 | AC=        99 | AR=4095 | DR=        18 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
-  tick= 378 | FETCH   | signal: INSTRUCTION_MEM_READ[18] = 0x70000011 latch_IR <- 1879048209                                                   | IP=  18 | IR=0x70000011 | AC=        99 | AR=4095 | DR=        18 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
-  tick= 379 | DECODE  | signal: IP_MUX(IP_INC) -> 19 latch_IP <- 19  decode: JZ mode=DIRECT operand=17                                         | IP=  19 | IR=0x70000011 | AC=        99 | AR=4095 | DR=        18 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
-  tick= 380 | EXECUTE | signal:                                                                                                                | IP=  19 | IR=0x70000011 | AC=        99 | AR=4095 | DR=        18 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
-  tick= 381 | FETCH   | signal: INSTRUCTION_MEM_READ[19] = 0xc8000000 latch_IR <- 3355443200                                                   | IP=  19 | IR=0xc8000000 | AC=        99 | AR=4095 | DR=        18 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
-  tick= 382 | DECODE  | signal: IP_MUX(IP_INC) -> 20 latch_IP <- 20  decode: HALT mode=DIRECT operand=0                                        | IP=  20 | IR=0xc8000000 | AC=        99 | AR=4095 | DR=        18 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
-  tick= 383 | EXECUTE | signal: HALT                                                                                                           | IP=  20 | IR=0xc8000000 | AC=        99 | AR=4095 | DR=        18 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  ... [пропущено 999960 тактов] ...
+  tick=999981 | EXECUTE | signal: DR_MUX(IR_OPERAND) -> 0 latch_DR <- 0                                                                          | IP=  18 | IR=0x0a000000 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999982 | EXECUTE | signal: AC_MUX(AC) -> 0 latch_AC <- 0                                                                                  | IP=  18 | IR=0x0a000000 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999983 | FETCH   | signal: INSTRUCTION_MEM_READ[18] = 0x70000011 latch_IR <- 1879048209                                                   | IP=  18 | IR=0x70000011 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999984 | DECODE  | signal: IP_MUX(IP_INC) -> 19 latch_IP <- 19  decode: JZ mode=DIRECT operand=17                                         | IP=  19 | IR=0x70000011 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999985 | EXECUTE | signal: IP_MUX(IR_OPERAND) -> 17 latch_IP <- 17                                                                        | IP=  17 | IR=0x70000011 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999986 | FETCH   | signal: INSTRUCTION_MEM_READ[17] = 0x0a000000 latch_IR <- 167772160                                                    | IP=  17 | IR=0x0a000000 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999987 | DECODE  | signal: IP_MUX(IP_INC) -> 18 latch_IP <- 18  decode: LOAD mode=IMM operand=0                                           | IP=  18 | IR=0x0a000000 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999988 | EXECUTE | signal: DR_MUX(IR_OPERAND) -> 0 latch_DR <- 0                                                                          | IP=  18 | IR=0x0a000000 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999989 | EXECUTE | signal: AC_MUX(AC) -> 0 latch_AC <- 0                                                                                  | IP=  18 | IR=0x0a000000 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999990 | FETCH   | signal: INSTRUCTION_MEM_READ[18] = 0x70000011 latch_IR <- 1879048209                                                   | IP=  18 | IR=0x70000011 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999991 | DECODE  | signal: IP_MUX(IP_INC) -> 19 latch_IP <- 19  decode: JZ mode=DIRECT operand=17                                         | IP=  19 | IR=0x70000011 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999992 | EXECUTE | signal: IP_MUX(IR_OPERAND) -> 17 latch_IP <- 17                                                                        | IP=  17 | IR=0x70000011 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999993 | FETCH   | signal: INSTRUCTION_MEM_READ[17] = 0x0a000000 latch_IR <- 167772160                                                    | IP=  17 | IR=0x0a000000 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999994 | DECODE  | signal: IP_MUX(IP_INC) -> 18 latch_IP <- 18  decode: LOAD mode=IMM operand=0                                           | IP=  18 | IR=0x0a000000 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999995 | EXECUTE | signal: DR_MUX(IR_OPERAND) -> 0 latch_DR <- 0                                                                          | IP=  18 | IR=0x0a000000 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999996 | EXECUTE | signal: AC_MUX(AC) -> 0 latch_AC <- 0                                                                                  | IP=  18 | IR=0x0a000000 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999997 | FETCH   | signal: INSTRUCTION_MEM_READ[18] = 0x70000011 latch_IR <- 1879048209                                                   | IP=  18 | IR=0x70000011 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999998 | DECODE  | signal: IP_MUX(IP_INC) -> 19 latch_IP <- 19  decode: JZ mode=DIRECT operand=17                                         | IP=  19 | IR=0x70000011 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=999999 | EXECUTE | signal: IP_MUX(IR_OPERAND) -> 17 latch_IP <- 17                                                                        | IP=  17 | IR=0x70000011 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=1000000 | FETCH   | signal: INSTRUCTION_MEM_READ[17] = 0x0a000000 latch_IR <- 167772160                                                    | IP=  17 | IR=0x0a000000 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1

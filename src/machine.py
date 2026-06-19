@@ -10,7 +10,7 @@ class DataPath:
 
     def __init__(self, program):
 
-        self.cu = None # type: ignore[assignment]
+        self.cu = None  # type: ignore[assignment]
 
         self.IP = config.START_IP
         self.IR = 0
@@ -511,6 +511,14 @@ class ControlUnit:
                 lambda: self.latch_SP(self.sp_mux("SP_INC")),
                 lambda: self.latch_AR(self.ar_mux("SP")),
                 lambda: self.latch_DR(self.dr_mux("MEM")),
+                lambda: self.unpack_SR(self.dp.DR),
+                lambda: self.latch_SP(self.sp_mux("SP_INC")),
+                lambda: self.latch_AR(self.ar_mux("SP")),
+                lambda: self.latch_DR(self.dr_mux("MEM")),
+                lambda: self.latch_AC(self.dp.alu("PASS_DR", self.ac_mux("AC"), False)),
+                lambda: self.latch_SP(self.sp_mux("SP_INC")),
+                lambda: self.latch_AR(self.ar_mux("SP")),
+                lambda: self.latch_DR(self.dr_mux("MEM")),
                 lambda: self.latch_IP(self.ip_mux("DR")),
                 lambda: self.latch_SR("IE", 1),
             ]
@@ -653,6 +661,13 @@ class ControlUnit:
     def latch_SR(self, key, value):
         self.dp.SR[key] = value
 
+    def unpack_SR(self, value):
+        self.dp.SR["IE"] = (value >> 4) & 1
+        self.dp.SR["N"] = (value >> 3) & 1
+        self.dp.SR["Z"] = (value >> 2) & 1
+        self.dp.SR["V"] = (value >> 1) & 1
+        self.dp.SR["C"] = value & 1
+
     def ip_mux(self, sel):
         if sel == "IP_INC":
             result = self.dp.IP + 1
@@ -700,6 +715,9 @@ class ControlUnit:
             result = self.dp.last_alu_result
         elif sel == "AC":
             result = self.dp.AC
+        elif sel == "SR":
+            s = self.dp.SR
+            result = (s["IE"] << 4) | (s["N"] << 3) | (s["Z"] << 2) | (s["V"] << 1) | s["C"]
         else:
             raise ValueError(f"Unknown DR_MUX sel: {sel}")
 
@@ -813,6 +831,17 @@ class ControlUnit:
         return flush + [
             lambda: self.latch_AR(self.ar_mux("SP")),
             lambda: self.latch_DR(self.dr_mux("IP")),
+            lambda: self.data_mem_write(self.dp.AR, self.dp.DR),
+            lambda: self.latch_SP(self.sp_mux("SP_DEC")),
+            lambda: self.latch_AR(self.ar_mux("SP")),
+            lambda: (
+                self.dp.alu("PASS_AC", self.ac_mux("AC"), False),
+                self.latch_DR(self.dr_mux("ALU")),
+            ),
+            lambda: self.data_mem_write(self.dp.AR, self.dp.DR),
+            lambda: self.latch_SP(self.sp_mux("SP_DEC")),
+            lambda: self.latch_AR(self.ar_mux("SP")),
+            lambda: self.latch_DR(self.dr_mux("SR")),
             lambda: self.data_mem_write(self.dp.AR, self.dp.DR),
             lambda: self.latch_SP(self.sp_mux("SP_DEC")),
             lambda: self.latch_IP(self.ip_mux("VECTOR")),

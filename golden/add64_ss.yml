@@ -59,105 +59,99 @@ source: |
   halt
 input: ''
 output: 1 705032704
-machine_code: "0000 - 68000001 - JMP 1  ; IP <- 1\n0001 - 68000072 - JMP 114  ; IP <- 114\n0002 - 100007D0 - STORE 2000  ;\
-  \ mem[2000] <- AC\n0003 - 0A000000 - LOAD #0  ; AC <- #0\n0004 - 100007D1 - STORE 2001  ; mem[2001] <- AC\n0005 - 0A000009\
-  \ - LOAD #9  ; AC <- #9\n0006 - 10000898 - STORE 2200  ; mem[2200] <- AC\n0007 - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n\
-  0008 - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC\n0009 - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n000A - 100007D0 -\
-  \ STORE 2000  ; mem[2000] <- AC\n000B - 0A000006 - LOAD #6  ; AC <- #6\n000C - 10000898 - STORE 2200  ; mem[2200] <- AC\n\
-  000D - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n000E - 100007D1 - STORE 2001  ; mem[2001] <- AC\n000F - 0A00000A -\
-  \ LOAD #10  ; AC <- #10\n0010 - 100007D2 - STORE 2002  ; mem[2002] <- AC\n0011 - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n\
-  0012 - 300007D2 - DIV 2002  ; AC <- AC / mem[2002]\n0013 - 100007D1 - STORE 2001  ; mem[2001] <- AC\n0014 - 0A000008 - LOAD\
-  \ #8  ; AC <- #8\n0015 - 10000898 - STORE 2200  ; mem[2200] <- AC\n0016 - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n0017\
-  \ - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC\n0018 - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n0019 - 100007D0 - STORE\
-  \ 2000  ; mem[2000] <- AC\n001A - 0A000006 - LOAD #6  ; AC <- #6\n001B - 10000898 - STORE 2200  ; mem[2200] <- AC\n001C\
-  \ - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n001D - 100007D1 - STORE 2001  ; mem[2001] <- AC\n001E - 0A000008 - LOAD\
-  \ #8  ; AC <- #8\n001F - 10000898 - STORE 2200  ; mem[2200] <- AC\n0020 - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n\
-  0021 - 100007D2 - STORE 2002  ; mem[2002] <- AC\n0022 - 0A00000A - LOAD #10  ; AC <- #10\n0023 - 100007D3 - STORE 2003 \
-  \ ; mem[2003] <- AC\n0024 - 080007D2 - LOAD 2002  ; AC <- mem[2002]\n0025 - 280007D3 - MUL 2003  ; AC <- AC * mem[2003]\n\
-  0026 - 100007D2 - STORE 2002  ; mem[2002] <- AC\n0027 - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n0028 - 200007D2 - SUB 2002\
-  \  ; AC <- AC - mem[2002]\n0029 - 100007D1 - STORE 2001  ; mem[2001] <- AC\n002A - 0A000007 - LOAD #7  ; AC <- #7\n002B\
-  \ - 10000898 - STORE 2200  ; mem[2200] <- AC\n002C - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n002D - 14000898 - STORE @2200\
-  \  ; mem[mem[2200]] <- AC\n002E - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n002F - 100007D0 - STORE 2000  ; mem[2000] <-\
-  \ AC\n0030 - 0A000064 - LOAD #100  ; AC <- #100\n0031 - 100007D1 - STORE 2001  ; mem[2001] <- AC\n0032 - 0A000009 - LOAD\
-  \ #9  ; AC <- #9\n0033 - 10000898 - STORE 2200  ; mem[2200] <- AC\n0034 - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n\
-  0035 - 100007D2 - STORE 2002  ; mem[2002] <- AC\n0036 - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n0037 - 180007D2 - ADD 2002\
-  \  ; AC <- AC + mem[2002]\n0038 - 100007D1 - STORE 2001  ; mem[2001] <- AC\n0039 - 0A00000A - LOAD #10  ; AC <- #10\n003A\
-  \ - 10000898 - STORE 2200  ; mem[2200] <- AC\n003B - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n003C - 14000898 - STORE @2200\
-  \  ; mem[mem[2200]] <- AC\n003D - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n003E - 100007D0 - STORE 2000  ; mem[2000] <-\
-  \ AC\n003F - 0A000007 - LOAD #7  ; AC <- #7\n0040 - 10000898 - STORE 2200  ; mem[2200] <- AC\n0041 - 0C000898 - LOAD @2200\
-  \  ; AC <- mem[mem[2200]]\n0042 - 100007D1 - STORE 2001  ; mem[2001] <- AC\n0043 - 0A00000A - LOAD #10  ; AC <- #10\n0044\
-  \ - 10000898 - STORE 2200  ; mem[2200] <- AC\n0045 - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n0046 - 10000898 - STORE\
-  \ 2200  ; mem[2200] <- AC\n0047 - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n0048 - 14000898 - STORE @2200  ; mem[mem[2200]]\
-  \ <- AC\n0049 - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n004A - 100007D0 - STORE 2000  ; mem[2000] <- AC\n004B - 0A000008\
-  \ - LOAD #8  ; AC <- #8\n004C - 10000898 - STORE 2200  ; mem[2200] <- AC\n004D - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n\
-  004E - 100007D1 - STORE 2001  ; mem[2001] <- AC\n004F - 0A000006 - LOAD #6  ; AC <- #6\n0050 - 10000898 - STORE 2200  ;\
-  \ mem[2200] <- AC\n0051 - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n0052 - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC\n\
-  0053 - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n0054 - 100007D0 - STORE 2000  ; mem[2000] <- AC\n0055 - 0A000009 - LOAD\
-  \ #9  ; AC <- #9\n0056 - 10000898 - STORE 2200  ; mem[2200] <- AC\n0057 - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n\
-  0058 - 100007D1 - STORE 2001  ; mem[2001] <- AC\n0059 - 0A000001 - LOAD #1  ; AC <- #1\n005A - 100007D2 - STORE 2002  ;\
-  \ mem[2002] <- AC\n005B - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n005C - 180007D2 - ADD 2002  ; AC <- AC + mem[2002]\n\
-  005D - 100007D1 - STORE 2001  ; mem[2001] <- AC\n005E - 0A000009 - LOAD #9  ; AC <- #9\n005F - 10000898 - STORE 2200  ;\
-  \ mem[2200] <- AC\n0060 - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n0061 - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC\n\
-  0062 - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n0063 - 100007D0 - STORE 2000  ; mem[2000] <- AC\n0064 - 0A000006 - LOAD\
-  \ #6  ; AC <- #6\n0065 - 10000898 - STORE 2200  ; mem[2200] <- AC\n0066 - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n\
-  0067 - 100007D1 - STORE 2001  ; mem[2001] <- AC\n0068 - 0A000000 - LOAD #0  ; AC <- #0\n0069 - 100007D2 - STORE 2002  ;\
-  \ mem[2002] <- AC\n006A - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n006B - 600007D2 - CMP 2002  ; flags <- AC - mem[2002]\n\
-  006C - 7000006F - JZ 111  ; if Z: IP <- 111\n006D - 0A000000 - LOAD #0  ; AC <- #0\n006E - 68000070 - JMP 112  ; IP <- 112\n\
-  006F - 0BFFFFFF - LOAD #-1  ; AC <- #-1\n0070 - 7000000A - JZ 10  ; if Z: IP <- 10\n0071 - A8000000 - RET 0  ; return\n\
-  0072 - 680000AC - JMP 172  ; IP <- 172\n0073 - 100007D0 - STORE 2000  ; mem[2000] <- AC\n0074 - 0A000009 - LOAD #9  ; AC\
-  \ <- #9\n0075 - 10000898 - STORE 2200  ; mem[2200] <- AC\n0076 - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n0077 - 100007D1\
-  \ - STORE 2001  ; mem[2001] <- AC\n0078 - 0A000001 - LOAD #1  ; AC <- #1\n0079 - 100007D2 - STORE 2002  ; mem[2002] <- AC\n\
-  007A - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n007B - 200007D2 - SUB 2002  ; AC <- AC - mem[2002]\n007C - 100007D1 - STORE\
-  \ 2001  ; mem[2001] <- AC\n007D - 0A000009 - LOAD #9  ; AC <- #9\n007E - 10000898 - STORE 2200  ; mem[2200] <- AC\n007F\
-  \ - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n0080 - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC\n0081 - 080007D0 - LOAD\
-  \ 2000  ; AC <- mem[2000]\n0082 - 100007D0 - STORE 2000  ; mem[2000] <- AC\n0083 - 0A000064 - LOAD #100  ; AC <- #100\n\
-  0084 - 100007D1 - STORE 2001  ; mem[2001] <- AC\n0085 - 0A000009 - LOAD #9  ; AC <- #9\n0086 - 10000898 - STORE 2200  ;\
-  \ mem[2200] <- AC\n0087 - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n0088 - 100007D2 - STORE 2002  ; mem[2002] <- AC\n\
-  0089 - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n008A - 180007D2 - ADD 2002  ; AC <- AC + mem[2002]\n008B - 100007D1 - STORE\
-  \ 2001  ; mem[2001] <- AC\n008C - 0A00000A - LOAD #10  ; AC <- #10\n008D - 10000898 - STORE 2200  ; mem[2200] <- AC\n008E\
-  \ - 080007D1 - LOAD 2001  ; AC <- mem[2001]\n008F - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC\n0090 - 080007D0 - LOAD\
-  \ 2000  ; AC <- mem[2000]\n0091 - 100007D0 - STORE 2000  ; mem[2000] <- AC\n0092 - 0A00000A - LOAD #10  ; AC <- #10\n0093\
-  \ - 10000898 - STORE 2200  ; mem[2200] <- AC\n0094 - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n0095 - 10000898 - STORE\
-  \ 2200  ; mem[2200] <- AC\n0096 - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n0097 - 100007D1 - STORE 2001  ; mem[2001]\
-  \ <- AC\n0098 - 0A000030 - LOAD #48  ; AC <- #48\n0099 - 100007D2 - STORE 2002  ; mem[2002] <- AC\n009A - 080007D1 - LOAD\
-  \ 2001  ; AC <- mem[2001]\n009B - 180007D2 - ADD 2002  ; AC <- AC + mem[2002]\n009C - B8000001 - OUT 1  ; port[1] <- AC\n\
-  009D - 100007D0 - STORE 2000  ; mem[2000] <- AC\n009E - 0A000009 - LOAD #9  ; AC <- #9\n009F - 10000898 - STORE 2200  ;\
-  \ mem[2200] <- AC\n00A0 - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n00A1 - 100007D1 - STORE 2001  ; mem[2001] <- AC\n\
-  00A2 - 0A000000 - LOAD #0  ; AC <- #0\n00A3 - 100007D2 - STORE 2002  ; mem[2002] <- AC\n00A4 - 080007D1 - LOAD 2001  ; AC\
-  \ <- mem[2001]\n00A5 - 600007D2 - CMP 2002  ; flags <- AC - mem[2002]\n00A6 - 700000A9 - JZ 169  ; if Z: IP <- 169\n00A7\
-  \ - 0A000000 - LOAD #0  ; AC <- #0\n00A8 - 680000AA - JMP 170  ; IP <- 170\n00A9 - 0BFFFFFF - LOAD #-1  ; AC <- #-1\n00AA\
-  \ - 70000073 - JZ 115  ; if Z: IP <- 115\n00AB - A8000000 - RET 0  ; return\n00AC - 680000B0 - JMP 176  ; IP <- 176\n00AD\
-  \ - A0000002 - CALL 2  ; call 2\n00AE - A0000073 - CALL 115  ; call 115\n00AF - A8000000 - RET 0  ; return\n00B0 - 0A000000\
-  \ - LOAD #0  ; AC <- #0\n00B1 - 100007D0 - STORE 2000  ; mem[2000] <- AC\n00B2 - 0A000000 - LOAD #0  ; AC <- #0\n00B3 -\
-  \ 10000898 - STORE 2200  ; mem[2200] <- AC\n00B4 - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n00B5 - 14000898 - STORE @2200\
-  \  ; mem[mem[2200]] <- AC\n00B6 - 0800000B - LOAD 11  ; AC <- mem[11]\n00B7 - 100007D0 - STORE 2000  ; mem[2000] <- AC\n\
-  00B8 - 0A000001 - LOAD #1  ; AC <- #1\n00B9 - 10000898 - STORE 2200  ; mem[2200] <- AC\n00BA - 080007D0 - LOAD 2000  ; AC\
-  \ <- mem[2000]\n00BB - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC\n00BC - 0A000000 - LOAD #0  ; AC <- #0\n00BD - 100007D0\
-  \ - STORE 2000  ; mem[2000] <- AC\n00BE - 0A000002 - LOAD #2  ; AC <- #2\n00BF - 10000898 - STORE 2200  ; mem[2200] <- AC\n\
-  00C0 - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n00C1 - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC\n00C2 - 0800000C -\
-  \ LOAD 12  ; AC <- mem[12]\n00C3 - 100007D0 - STORE 2000  ; mem[2000] <- AC\n00C4 - 0A000003 - LOAD #3  ; AC <- #3\n00C5\
-  \ - 10000898 - STORE 2200  ; mem[2200] <- AC\n00C6 - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n00C7 - 14000898 - STORE @2200\
-  \  ; mem[mem[2200]] <- AC\n00C8 - 0A000001 - LOAD #1  ; AC <- #1\n00C9 - 10000898 - STORE 2200  ; mem[2200] <- AC\n00CA\
-  \ - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n00CB - 100007D0 - STORE 2000  ; mem[2000] <- AC\n00CC - 0A000003 - LOAD\
-  \ #3  ; AC <- #3\n00CD - 10000898 - STORE 2200  ; mem[2200] <- AC\n00CE - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n\
-  00CF - 100007D1 - STORE 2001  ; mem[2001] <- AC\n00D0 - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n00D1 - 180007D1 - ADD 2001\
-  \  ; AC <- AC + mem[2001]\n00D2 - 100007D0 - STORE 2000  ; mem[2000] <- AC\n00D3 - 0A000005 - LOAD #5  ; AC <- #5\n00D4\
-  \ - 10000898 - STORE 2200  ; mem[2200] <- AC\n00D5 - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n00D6 - 14000898 - STORE @2200\
-  \  ; mem[mem[2200]] <- AC\n00D7 - 0A000000 - LOAD #0  ; AC <- #0\n00D8 - 10000898 - STORE 2200  ; mem[2200] <- AC\n00D9\
-  \ - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n00DA - 100007D0 - STORE 2000  ; mem[2000] <- AC\n00DB - 0A000002 - LOAD\
-  \ #2  ; AC <- #2\n00DC - 10000898 - STORE 2200  ; mem[2200] <- AC\n00DD - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n\
-  00DE - 100007D1 - STORE 2001  ; mem[2001] <- AC\n00DF - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n00E0 - D00007D1 - ADC 2001\
-  \  ; \n00E1 - 100007D0 - STORE 2000  ; mem[2000] <- AC\n00E2 - 0A000004 - LOAD #4  ; AC <- #4\n00E3 - 10000898 - STORE 2200\
-  \  ; mem[2200] <- AC\n00E4 - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n00E5 - 14000898 - STORE @2200  ; mem[mem[2200]] <-\
-  \ AC\n00E6 - 0A000004 - LOAD #4  ; AC <- #4\n00E7 - 10000898 - STORE 2200  ; mem[2200] <- AC\n00E8 - 0C000898 - LOAD @2200\
-  \  ; AC <- mem[mem[2200]]\n00E9 - 100007D0 - STORE 2000  ; mem[2000] <- AC\n00EA - 0A000006 - LOAD #6  ; AC <- #6\n00EB\
-  \ - 10000898 - STORE 2200  ; mem[2200] <- AC\n00EC - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n00ED - 14000898 - STORE @2200\
-  \  ; mem[mem[2200]] <- AC\n00EE - A00000AD - CALL 173  ; call 173\n00EF - 0A000020 - LOAD #32  ; AC <- #32\n00F0 - B8000001\
-  \ - OUT 1  ; port[1] <- AC\n00F1 - 0A000005 - LOAD #5  ; AC <- #5\n00F2 - 10000898 - STORE 2200  ; mem[2200] <- AC\n00F3\
-  \ - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]\n00F4 - 100007D0 - STORE 2000  ; mem[2000] <- AC\n00F5 - 0A000006 - LOAD\
-  \ #6  ; AC <- #6\n00F6 - 10000898 - STORE 2200  ; mem[2200] <- AC\n00F7 - 080007D0 - LOAD 2000  ; AC <- mem[2000]\n00F8\
-  \ - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC\n00F9 - A00000AD - CALL 173  ; call 173\n00FA - C8000000 - HALT 0  ;\
-  \ stop\n00FB - C8000000 - HALT 0  ; stop\n"
+machine_code: "0000 - 68000001 - JMP 1  ; IP <- 1\n0001 - 68000072 - JMP 114  ; IP <- 114\n0002 - 10000000 - STORE 0  ; mem[0]\
+  \ <- AC\n0003 - 0A000000 - LOAD #0  ; AC <- #0\n0004 - 10000001 - STORE 1  ; mem[1] <- AC\n0005 - 0A0000D4 - LOAD #212 \
+  \ ; AC <- #212\n0006 - 100000C8 - STORE 200  ; mem[200] <- AC\n0007 - 08000001 - LOAD 1  ; AC <- mem[1]\n0008 - 140000C8\
+  \ - STORE @200  ; mem[mem[200]] <- AC\n0009 - 08000000 - LOAD 0  ; AC <- mem[0]\n000A - 10000000 - STORE 0  ; mem[0] <-\
+  \ AC\n000B - 0A0000D1 - LOAD #209  ; AC <- #209\n000C - 100000C8 - STORE 200  ; mem[200] <- AC\n000D - 0C0000C8 - LOAD @200\
+  \  ; AC <- mem[mem[200]]\n000E - 10000001 - STORE 1  ; mem[1] <- AC\n000F - 0A00000A - LOAD #10  ; AC <- #10\n0010 - 10000002\
+  \ - STORE 2  ; mem[2] <- AC\n0011 - 08000001 - LOAD 1  ; AC <- mem[1]\n0012 - 30000002 - DIV 2  ; AC <- AC / mem[2]\n0013\
+  \ - 10000001 - STORE 1  ; mem[1] <- AC\n0014 - 0A0000D3 - LOAD #211  ; AC <- #211\n0015 - 100000C8 - STORE 200  ; mem[200]\
+  \ <- AC\n0016 - 08000001 - LOAD 1  ; AC <- mem[1]\n0017 - 140000C8 - STORE @200  ; mem[mem[200]] <- AC\n0018 - 08000000\
+  \ - LOAD 0  ; AC <- mem[0]\n0019 - 10000000 - STORE 0  ; mem[0] <- AC\n001A - 0A0000D1 - LOAD #209  ; AC <- #209\n001B -\
+  \ 100000C8 - STORE 200  ; mem[200] <- AC\n001C - 0C0000C8 - LOAD @200  ; AC <- mem[mem[200]]\n001D - 10000001 - STORE 1\
+  \  ; mem[1] <- AC\n001E - 0A0000D3 - LOAD #211  ; AC <- #211\n001F - 100000C8 - STORE 200  ; mem[200] <- AC\n0020 - 0C0000C8\
+  \ - LOAD @200  ; AC <- mem[mem[200]]\n0021 - 10000002 - STORE 2  ; mem[2] <- AC\n0022 - 0A00000A - LOAD #10  ; AC <- #10\n\
+  0023 - 10000003 - STORE 3  ; mem[3] <- AC\n0024 - 08000002 - LOAD 2  ; AC <- mem[2]\n0025 - 28000003 - MUL 3  ; AC <- AC\
+  \ * mem[3]\n0026 - 10000002 - STORE 2  ; mem[2] <- AC\n0027 - 08000001 - LOAD 1  ; AC <- mem[1]\n0028 - 20000002 - SUB 2\
+  \  ; AC <- AC - mem[2]\n0029 - 10000001 - STORE 1  ; mem[1] <- AC\n002A - 0A0000D2 - LOAD #210  ; AC <- #210\n002B - 100000C8\
+  \ - STORE 200  ; mem[200] <- AC\n002C - 08000001 - LOAD 1  ; AC <- mem[1]\n002D - 140000C8 - STORE @200  ; mem[mem[200]]\
+  \ <- AC\n002E - 08000000 - LOAD 0  ; AC <- mem[0]\n002F - 10000000 - STORE 0  ; mem[0] <- AC\n0030 - 0A000064 - LOAD #100\
+  \  ; AC <- #100\n0031 - 10000001 - STORE 1  ; mem[1] <- AC\n0032 - 0A0000D4 - LOAD #212  ; AC <- #212\n0033 - 100000C8 -\
+  \ STORE 200  ; mem[200] <- AC\n0034 - 0C0000C8 - LOAD @200  ; AC <- mem[mem[200]]\n0035 - 10000002 - STORE 2  ; mem[2] <-\
+  \ AC\n0036 - 08000001 - LOAD 1  ; AC <- mem[1]\n0037 - 18000002 - ADD 2  ; AC <- AC + mem[2]\n0038 - 10000001 - STORE 1\
+  \  ; mem[1] <- AC\n0039 - 0A0000D5 - LOAD #213  ; AC <- #213\n003A - 100000C8 - STORE 200  ; mem[200] <- AC\n003B - 08000001\
+  \ - LOAD 1  ; AC <- mem[1]\n003C - 140000C8 - STORE @200  ; mem[mem[200]] <- AC\n003D - 08000000 - LOAD 0  ; AC <- mem[0]\n\
+  003E - 10000000 - STORE 0  ; mem[0] <- AC\n003F - 0A0000D2 - LOAD #210  ; AC <- #210\n0040 - 100000C8 - STORE 200  ; mem[200]\
+  \ <- AC\n0041 - 0C0000C8 - LOAD @200  ; AC <- mem[mem[200]]\n0042 - 10000001 - STORE 1  ; mem[1] <- AC\n0043 - 0A0000D5\
+  \ - LOAD #213  ; AC <- #213\n0044 - 100000C8 - STORE 200  ; mem[200] <- AC\n0045 - 0C0000C8 - LOAD @200  ; AC <- mem[mem[200]]\n\
+  0046 - 100000C8 - STORE 200  ; mem[200] <- AC\n0047 - 08000001 - LOAD 1  ; AC <- mem[1]\n0048 - 140000C8 - STORE @200  ;\
+  \ mem[mem[200]] <- AC\n0049 - 08000000 - LOAD 0  ; AC <- mem[0]\n004A - 10000000 - STORE 0  ; mem[0] <- AC\n004B - 0A0000D3\
+  \ - LOAD #211  ; AC <- #211\n004C - 100000C8 - STORE 200  ; mem[200] <- AC\n004D - 0C0000C8 - LOAD @200  ; AC <- mem[mem[200]]\n\
+  004E - 10000001 - STORE 1  ; mem[1] <- AC\n004F - 0A0000D1 - LOAD #209  ; AC <- #209\n0050 - 100000C8 - STORE 200  ; mem[200]\
+  \ <- AC\n0051 - 08000001 - LOAD 1  ; AC <- mem[1]\n0052 - 140000C8 - STORE @200  ; mem[mem[200]] <- AC\n0053 - 08000000\
+  \ - LOAD 0  ; AC <- mem[0]\n0054 - 10000000 - STORE 0  ; mem[0] <- AC\n0055 - 0A0000D4 - LOAD #212  ; AC <- #212\n0056 -\
+  \ 100000C8 - STORE 200  ; mem[200] <- AC\n0057 - 0C0000C8 - LOAD @200  ; AC <- mem[mem[200]]\n0058 - 10000001 - STORE 1\
+  \  ; mem[1] <- AC\n0059 - 0A000001 - LOAD #1  ; AC <- #1\n005A - 10000002 - STORE 2  ; mem[2] <- AC\n005B - 08000001 - LOAD\
+  \ 1  ; AC <- mem[1]\n005C - 18000002 - ADD 2  ; AC <- AC + mem[2]\n005D - 10000001 - STORE 1  ; mem[1] <- AC\n005E - 0A0000D4\
+  \ - LOAD #212  ; AC <- #212\n005F - 100000C8 - STORE 200  ; mem[200] <- AC\n0060 - 08000001 - LOAD 1  ; AC <- mem[1]\n0061\
+  \ - 140000C8 - STORE @200  ; mem[mem[200]] <- AC\n0062 - 08000000 - LOAD 0  ; AC <- mem[0]\n0063 - 10000000 - STORE 0  ;\
+  \ mem[0] <- AC\n0064 - 0A0000D1 - LOAD #209  ; AC <- #209\n0065 - 100000C8 - STORE 200  ; mem[200] <- AC\n0066 - 0C0000C8\
+  \ - LOAD @200  ; AC <- mem[mem[200]]\n0067 - 10000001 - STORE 1  ; mem[1] <- AC\n0068 - 0A000000 - LOAD #0  ; AC <- #0\n\
+  0069 - 10000002 - STORE 2  ; mem[2] <- AC\n006A - 08000001 - LOAD 1  ; AC <- mem[1]\n006B - 60000002 - CMP 2  ; flags <-\
+  \ AC - mem[2]\n006C - 7000006F - JZ 111  ; if Z: IP <- 111\n006D - 0A000000 - LOAD #0  ; AC <- #0\n006E - 68000070 - JMP\
+  \ 112  ; IP <- 112\n006F - 0BFFFFFF - LOAD #-1  ; AC <- #-1\n0070 - 7000000A - JZ 10  ; if Z: IP <- 10\n0071 - A8000000\
+  \ - RET 0  ; return\n0072 - 680000AC - JMP 172  ; IP <- 172\n0073 - 10000000 - STORE 0  ; mem[0] <- AC\n0074 - 0A0000D4\
+  \ - LOAD #212  ; AC <- #212\n0075 - 100000C8 - STORE 200  ; mem[200] <- AC\n0076 - 0C0000C8 - LOAD @200  ; AC <- mem[mem[200]]\n\
+  0077 - 10000001 - STORE 1  ; mem[1] <- AC\n0078 - 0A000001 - LOAD #1  ; AC <- #1\n0079 - 10000002 - STORE 2  ; mem[2] <-\
+  \ AC\n007A - 08000001 - LOAD 1  ; AC <- mem[1]\n007B - 20000002 - SUB 2  ; AC <- AC - mem[2]\n007C - 10000001 - STORE 1\
+  \  ; mem[1] <- AC\n007D - 0A0000D4 - LOAD #212  ; AC <- #212\n007E - 100000C8 - STORE 200  ; mem[200] <- AC\n007F - 08000001\
+  \ - LOAD 1  ; AC <- mem[1]\n0080 - 140000C8 - STORE @200  ; mem[mem[200]] <- AC\n0081 - 08000000 - LOAD 0  ; AC <- mem[0]\n\
+  0082 - 10000000 - STORE 0  ; mem[0] <- AC\n0083 - 0A000064 - LOAD #100  ; AC <- #100\n0084 - 10000001 - STORE 1  ; mem[1]\
+  \ <- AC\n0085 - 0A0000D4 - LOAD #212  ; AC <- #212\n0086 - 100000C8 - STORE 200  ; mem[200] <- AC\n0087 - 0C0000C8 - LOAD\
+  \ @200  ; AC <- mem[mem[200]]\n0088 - 10000002 - STORE 2  ; mem[2] <- AC\n0089 - 08000001 - LOAD 1  ; AC <- mem[1]\n008A\
+  \ - 18000002 - ADD 2  ; AC <- AC + mem[2]\n008B - 10000001 - STORE 1  ; mem[1] <- AC\n008C - 0A0000D5 - LOAD #213  ; AC\
+  \ <- #213\n008D - 100000C8 - STORE 200  ; mem[200] <- AC\n008E - 08000001 - LOAD 1  ; AC <- mem[1]\n008F - 140000C8 - STORE\
+  \ @200  ; mem[mem[200]] <- AC\n0090 - 08000000 - LOAD 0  ; AC <- mem[0]\n0091 - 10000000 - STORE 0  ; mem[0] <- AC\n0092\
+  \ - 0A0000D5 - LOAD #213  ; AC <- #213\n0093 - 100000C8 - STORE 200  ; mem[200] <- AC\n0094 - 0C0000C8 - LOAD @200  ; AC\
+  \ <- mem[mem[200]]\n0095 - 100000C8 - STORE 200  ; mem[200] <- AC\n0096 - 0C0000C8 - LOAD @200  ; AC <- mem[mem[200]]\n\
+  0097 - 10000001 - STORE 1  ; mem[1] <- AC\n0098 - 0A000030 - LOAD #48  ; AC <- #48\n0099 - 10000002 - STORE 2  ; mem[2]\
+  \ <- AC\n009A - 08000001 - LOAD 1  ; AC <- mem[1]\n009B - 18000002 - ADD 2  ; AC <- AC + mem[2]\n009C - B8000001 - OUT 1\
+  \  ; port[1] <- AC\n009D - 10000000 - STORE 0  ; mem[0] <- AC\n009E - 0A0000D4 - LOAD #212  ; AC <- #212\n009F - 100000C8\
+  \ - STORE 200  ; mem[200] <- AC\n00A0 - 0C0000C8 - LOAD @200  ; AC <- mem[mem[200]]\n00A1 - 10000001 - STORE 1  ; mem[1]\
+  \ <- AC\n00A2 - 0A000000 - LOAD #0  ; AC <- #0\n00A3 - 10000002 - STORE 2  ; mem[2] <- AC\n00A4 - 08000001 - LOAD 1  ; AC\
+  \ <- mem[1]\n00A5 - 60000002 - CMP 2  ; flags <- AC - mem[2]\n00A6 - 700000A9 - JZ 169  ; if Z: IP <- 169\n00A7 - 0A000000\
+  \ - LOAD #0  ; AC <- #0\n00A8 - 680000AA - JMP 170  ; IP <- 170\n00A9 - 0BFFFFFF - LOAD #-1  ; AC <- #-1\n00AA - 70000073\
+  \ - JZ 115  ; if Z: IP <- 115\n00AB - A8000000 - RET 0  ; return\n00AC - 680000B0 - JMP 176  ; IP <- 176\n00AD - A0000002\
+  \ - CALL 2  ; call 2\n00AE - A0000073 - CALL 115  ; call 115\n00AF - A8000000 - RET 0  ; return\n00B0 - 0A000000 - LOAD\
+  \ #0  ; AC <- #0\n00B1 - 10000000 - STORE 0  ; mem[0] <- AC\n00B2 - 0A0000CB - LOAD #203  ; AC <- #203\n00B3 - 100000C8\
+  \ - STORE 200  ; mem[200] <- AC\n00B4 - 08000000 - LOAD 0  ; AC <- mem[0]\n00B5 - 140000C8 - STORE @200  ; mem[mem[200]]\
+  \ <- AC\n00B6 - 080000D6 - LOAD 214  ; AC <- mem[214]\n00B7 - 10000000 - STORE 0  ; mem[0] <- AC\n00B8 - 0A0000CC - LOAD\
+  \ #204  ; AC <- #204\n00B9 - 100000C8 - STORE 200  ; mem[200] <- AC\n00BA - 08000000 - LOAD 0  ; AC <- mem[0]\n00BB - 140000C8\
+  \ - STORE @200  ; mem[mem[200]] <- AC\n00BC - 0A000000 - LOAD #0  ; AC <- #0\n00BD - 10000000 - STORE 0  ; mem[0] <- AC\n\
+  00BE - 0A0000CD - LOAD #205  ; AC <- #205\n00BF - 100000C8 - STORE 200  ; mem[200] <- AC\n00C0 - 08000000 - LOAD 0  ; AC\
+  \ <- mem[0]\n00C1 - 140000C8 - STORE @200  ; mem[mem[200]] <- AC\n00C2 - 080000D7 - LOAD 215  ; AC <- mem[215]\n00C3 - 10000000\
+  \ - STORE 0  ; mem[0] <- AC\n00C4 - 0A0000CE - LOAD #206  ; AC <- #206\n00C5 - 100000C8 - STORE 200  ; mem[200] <- AC\n\
+  00C6 - 08000000 - LOAD 0  ; AC <- mem[0]\n00C7 - 140000C8 - STORE @200  ; mem[mem[200]] <- AC\n00C8 - 0A0000CC - LOAD #204\
+  \  ; AC <- #204\n00C9 - 100000C8 - STORE 200  ; mem[200] <- AC\n00CA - 0C0000C8 - LOAD @200  ; AC <- mem[mem[200]]\n00CB\
+  \ - 10000000 - STORE 0  ; mem[0] <- AC\n00CC - 0A0000CE - LOAD #206  ; AC <- #206\n00CD - 100000C8 - STORE 200  ; mem[200]\
+  \ <- AC\n00CE - 0C0000C8 - LOAD @200  ; AC <- mem[mem[200]]\n00CF - 10000001 - STORE 1  ; mem[1] <- AC\n00D0 - 08000000\
+  \ - LOAD 0  ; AC <- mem[0]\n00D1 - 18000001 - ADD 1  ; AC <- AC + mem[1]\n00D2 - 10000000 - STORE 0  ; mem[0] <- AC\n00D3\
+  \ - 0A0000D0 - LOAD #208  ; AC <- #208\n00D4 - 100000C8 - STORE 200  ; mem[200] <- AC\n00D5 - 08000000 - LOAD 0  ; AC <-\
+  \ mem[0]\n00D6 - 140000C8 - STORE @200  ; mem[mem[200]] <- AC\n00D7 - 0A0000CB - LOAD #203  ; AC <- #203\n00D8 - 100000C8\
+  \ - STORE 200  ; mem[200] <- AC\n00D9 - 0C0000C8 - LOAD @200  ; AC <- mem[mem[200]]\n00DA - 10000000 - STORE 0  ; mem[0]\
+  \ <- AC\n00DB - 0A0000CD - LOAD #205  ; AC <- #205\n00DC - 100000C8 - STORE 200  ; mem[200] <- AC\n00DD - 0C0000C8 - LOAD\
+  \ @200  ; AC <- mem[mem[200]]\n00DE - 10000001 - STORE 1  ; mem[1] <- AC\n00DF - 08000000 - LOAD 0  ; AC <- mem[0]\n00E0\
+  \ - D0000001 - ADC 1  ; \n00E1 - 10000000 - STORE 0  ; mem[0] <- AC\n00E2 - 0A0000CF - LOAD #207  ; AC <- #207\n00E3 - 100000C8\
+  \ - STORE 200  ; mem[200] <- AC\n00E4 - 08000000 - LOAD 0  ; AC <- mem[0]\n00E5 - 140000C8 - STORE @200  ; mem[mem[200]]\
+  \ <- AC\n00E6 - 0A0000CF - LOAD #207  ; AC <- #207\n00E7 - 100000C8 - STORE 200  ; mem[200] <- AC\n00E8 - 0C0000C8 - LOAD\
+  \ @200  ; AC <- mem[mem[200]]\n00E9 - 10000000 - STORE 0  ; mem[0] <- AC\n00EA - 0A0000D1 - LOAD #209  ; AC <- #209\n00EB\
+  \ - 100000C8 - STORE 200  ; mem[200] <- AC\n00EC - 08000000 - LOAD 0  ; AC <- mem[0]\n00ED - 140000C8 - STORE @200  ; mem[mem[200]]\
+  \ <- AC\n00EE - A00000AD - CALL 173  ; call 173\n00EF - 0A000020 - LOAD #32  ; AC <- #32\n00F0 - B8000001 - OUT 1  ; port[1]\
+  \ <- AC\n00F1 - 0A0000D0 - LOAD #208  ; AC <- #208\n00F2 - 100000C8 - STORE 200  ; mem[200] <- AC\n00F3 - 0C0000C8 - LOAD\
+  \ @200  ; AC <- mem[mem[200]]\n00F4 - 10000000 - STORE 0  ; mem[0] <- AC\n00F5 - 0A0000D1 - LOAD #209  ; AC <- #209\n00F6\
+  \ - 100000C8 - STORE 200  ; mem[200] <- AC\n00F7 - 08000000 - LOAD 0  ; AC <- mem[0]\n00F8 - 140000C8 - STORE @200  ; mem[mem[200]]\
+  \ <- AC\n00F9 - A00000AD - CALL 173  ; call 173\n00FA - C8000000 - HALT 0  ; stop\n00FB - C8000000 - HALT 0  ; stop\n"
 log: |-
   tick=   1 | FETCH   | signal: INSTRUCTION_MEM_READ[1] = 0x68000072 latch_IR <- 1744830578                                                    | IP=   1 | IR=0x68000072 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=   2 | DECODE  | signal: IP_MUX(IP_INC) -> 2 latch_IP <- 2  decode: JMP mode=DIRECT operand=114                                         | IP=   2 | IR=0x68000072 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
@@ -172,18 +166,18 @@ log: |-
   tick=  11 | DECODE  | signal: IP_MUX(IP_INC) -> 177 latch_IP <- 177  decode: LOAD mode=IMM operand=0                                         | IP= 177 | IR=0x0a000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=  12 | EXECUTE | signal: DR_MUX(IR_OPERAND) -> 0 latch_DR <- 0                                                                          | IP= 177 | IR=0x0a000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=  13 | EXECUTE | signal: AC_MUX(AC) -> 0 latch_AC <- 0                                                                                  | IP= 177 | IR=0x0a000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
-  tick=  14 | FETCH   | signal: INSTRUCTION_MEM_READ[177] = 0x100007d0 latch_IR <- 268437456                                                   | IP= 177 | IR=0x100007d0 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
-  tick=  15 | DECODE  | signal: IP_MUX(IP_INC) -> 178 latch_IP <- 178  decode: STORE mode=DIRECT operand=2000                                  | IP= 178 | IR=0x100007d0 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
-  tick=  16 | EXECUTE | signal: latch_AC_AR <- 2000 set_AC_valid <- 1 STORE-MARK ac belongs [2000]                                             | IP= 178 | IR=0x100007d0 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
-  tick=  17 | EXECUTE | signal: DR_MUX(AC) -> 0 latch_DR <- 0  | AR_MUX(ACS_AR) -> 0 latch_AR <- 0                                             | IP= 178 | IR=0x100007d0 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
-  tick=  18 | EXECUTE | signal: AC_MUX(AC_SHADOW) -> 0 latch_AC <- 0  | ARS_MUX(AC_AR) -> 2000 latch_ACS_AR <- 2000 set_AC_valid <- 0 set_ACS_valid <- 1 | IP= 178 | IR=0x100007d0 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
-  tick=  19 | EXECUTE | signal: latch_AC_SHADOW <- 0  | AR_MUX(AR) -> 0 latch_AC_AR <- 0 | SWAP done: ac/_ shadow/2000                         | IP= 178 | IR=0x100007d0 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
-  tick=  20 | FETCH   | signal: INSTRUCTION_MEM_READ[178] = 0x0a000000 latch_IR <- 167772160                                                   | IP= 178 | IR=0x0a000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
-  ... [РїСЂРѕРїСѓС‰РµРЅРѕ 10025 С‚Р°РєС‚РѕРІ] ...
-  tick=10046 | EXECUTE | signal:                                                                                                                | IP= 171 | IR=0x70000073 | AC=        -1 | AR=2002 | DR=        -1 | SP=4093 | N=1 Z=0 V=0 C=0 IE=1
-  tick=10047 | FETCH   | signal: INSTRUCTION_MEM_READ[171] = 0xa8000000 latch_IR <- 2818572288                                                  | IP= 171 | IR=0xa8000000 | AC=        -1 | AR=2002 | DR=        -1 | SP=4093 | N=1 Z=0 V=0 C=0 IE=1
-  tick=10048 | DECODE  | signal: IP_MUX(IP_INC) -> 172 latch_IP <- 172  decode: RET mode=DIRECT operand=0                                       | IP= 172 | IR=0xa8000000 | AC=        -1 | AR=2002 | DR=        -1 | SP=4093 | N=1 Z=0 V=0 C=0 IE=1
-  tick=10049 | EXECUTE | signal: SP_MUX(SP_INC) -> 4094 latch_SP <- 4094                                                                        | IP= 172 | IR=0xa8000000 | AC=        -1 | AR=2002 | DR=        -1 | SP=4094 | N=1 Z=0 V=0 C=0 IE=1
+  tick=  14 | FETCH   | signal: INSTRUCTION_MEM_READ[177] = 0x10000000 latch_IR <- 268435456                                                   | IP= 177 | IR=0x10000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  15 | DECODE  | signal: IP_MUX(IP_INC) -> 178 latch_IP <- 178  decode: STORE mode=DIRECT operand=0                                     | IP= 178 | IR=0x10000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  16 | EXECUTE | signal: latch_AC_AR <- 0 set_AC_valid <- 1 STORE-MARK ac belongs [0]                                                   | IP= 178 | IR=0x10000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  17 | EXECUTE | signal: DR_MUX(AC) -> 0 latch_DR <- 0  | AR_MUX(ACS_AR) -> 0 latch_AR <- 0                                             | IP= 178 | IR=0x10000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  18 | EXECUTE | signal: AC_MUX(AC_SHADOW) -> 0 latch_AC <- 0  | ARS_MUX(AC_AR) -> 0 latch_ACS_AR <- 0 set_AC_valid <- 0 set_ACS_valid <- 1 | IP= 178 | IR=0x10000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  19 | EXECUTE | signal: latch_AC_SHADOW <- 0  | AR_MUX(AR) -> 0 latch_AC_AR <- 0 | SWAP done: ac/_ shadow/0                            | IP= 178 | IR=0x10000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  20 | FETCH   | signal: INSTRUCTION_MEM_READ[178] = 0x0a0000cb latch_IR <- 167772363                                                   | IP= 178 | IR=0x0a0000cb | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  ... [пропущено 10025 тактов] ...
+  tick=10046 | EXECUTE | signal:                                                                                                                | IP= 171 | IR=0x70000073 | AC=        -1 | AR=   2 | DR=        -1 | SP=4093 | N=1 Z=0 V=0 C=0 IE=1
+  tick=10047 | FETCH   | signal: INSTRUCTION_MEM_READ[171] = 0xa8000000 latch_IR <- 2818572288                                                  | IP= 171 | IR=0xa8000000 | AC=        -1 | AR=   2 | DR=        -1 | SP=4093 | N=1 Z=0 V=0 C=0 IE=1
+  tick=10048 | DECODE  | signal: IP_MUX(IP_INC) -> 172 latch_IP <- 172  decode: RET mode=DIRECT operand=0                                       | IP= 172 | IR=0xa8000000 | AC=        -1 | AR=   2 | DR=        -1 | SP=4093 | N=1 Z=0 V=0 C=0 IE=1
+  tick=10049 | EXECUTE | signal: SP_MUX(SP_INC) -> 4094 latch_SP <- 4094                                                                        | IP= 172 | IR=0xa8000000 | AC=        -1 | AR=   2 | DR=        -1 | SP=4094 | N=1 Z=0 V=0 C=0 IE=1
   tick=10050 | EXECUTE | signal: AR_MUX(SP) -> 4094 latch_AR <- 4094                                                                            | IP= 172 | IR=0xa8000000 | AC=        -1 | AR=4094 | DR=        -1 | SP=4094 | N=1 Z=0 V=0 C=0 IE=1
   tick=10051 | EXECUTE | signal: MEM_READ[4094] = 175  | DR_MUX(MEM) -> 175 latch_DR <- 175                                                     | IP= 172 | IR=0xa8000000 | AC=        -1 | AR=4094 | DR=       175 | SP=4094 | N=1 Z=0 V=0 C=0 IE=1
   tick=10052 | EXECUTE | signal: IP_MUX(DR) -> 175 latch_IP <- 175                                                                              | IP= 175 | IR=0xa8000000 | AC=        -1 | AR=4094 | DR=       175 | SP=4094 | N=1 Z=0 V=0 C=0 IE=1
