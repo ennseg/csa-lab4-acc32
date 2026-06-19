@@ -10,7 +10,7 @@ class DataPath:
 
     def __init__(self, program):
 
-        self.cu = None
+        self.cu = None # type: ignore[assignment]
 
         self.IP = config.START_IP
         self.IR = 0
