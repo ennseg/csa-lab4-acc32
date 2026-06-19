@@ -1,0 +1,25 @@
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+EXAMPLES_DIR = PROJECT_ROOT / "examples"
+BUILD_DIR = PROJECT_ROOT / "build"
+
+SUPERSCALAR = True
+
+DATA_MEMORY_SIZE = 2**12
+
+TMP_BASE = 2000
+
+PTR_TMP = 2200
+XTR_TMP = 2201
+ZERO_CELL = 2202
+
+STACK_TOP = 4095
+
+START_IP = 1
+IRQ_VECTOR_ADDR = 0
+
+START_TICK = 300
+TICK_INTERVAL = 300
+
+MAX_TICKS = 1_000_000

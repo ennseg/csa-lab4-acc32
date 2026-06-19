@@ -1,0 +1,131 @@
+name: superscalar_demo_ss
+superscalar: true
+source: |
+  \ демонстрация суперскаляра
+  variable a
+  variable b
+  1 a !
+  2 b !
+  a @ 1 + a !
+  b @ 1 + b !
+  a @ 1 + a !
+  a @ 48 + emit
+  b @ 48 + emit
+  halt
+input: ''
+output: '33'
+machine_code: |
+  0000 - 68000001 - JMP 1  ; IP <- 1
+  0001 - 0A000001 - LOAD #1  ; AC <- #1
+  0002 - 100007D0 - STORE 2000  ; mem[2000] <- AC
+  0003 - 0A000000 - LOAD #0  ; AC <- #0
+  0004 - 10000898 - STORE 2200  ; mem[2200] <- AC
+  0005 - 080007D0 - LOAD 2000  ; AC <- mem[2000]
+  0006 - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC
+  0007 - 0A000002 - LOAD #2  ; AC <- #2
+  0008 - 100007D0 - STORE 2000  ; mem[2000] <- AC
+  0009 - 0A000001 - LOAD #1  ; AC <- #1
+  000A - 10000898 - STORE 2200  ; mem[2200] <- AC
+  000B - 080007D0 - LOAD 2000  ; AC <- mem[2000]
+  000C - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC
+  000D - 0A000000 - LOAD #0  ; AC <- #0
+  000E - 10000898 - STORE 2200  ; mem[2200] <- AC
+  000F - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]
+  0010 - 100007D0 - STORE 2000  ; mem[2000] <- AC
+  0011 - 0A000001 - LOAD #1  ; AC <- #1
+  0012 - 100007D1 - STORE 2001  ; mem[2001] <- AC
+  0013 - 080007D0 - LOAD 2000  ; AC <- mem[2000]
+  0014 - 180007D1 - ADD 2001  ; AC <- AC + mem[2001]
+  0015 - 100007D0 - STORE 2000  ; mem[2000] <- AC
+  0016 - 0A000000 - LOAD #0  ; AC <- #0
+  0017 - 10000898 - STORE 2200  ; mem[2200] <- AC
+  0018 - 080007D0 - LOAD 2000  ; AC <- mem[2000]
+  0019 - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC
+  001A - 0A000001 - LOAD #1  ; AC <- #1
+  001B - 10000898 - STORE 2200  ; mem[2200] <- AC
+  001C - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]
+  001D - 100007D0 - STORE 2000  ; mem[2000] <- AC
+  001E - 0A000001 - LOAD #1  ; AC <- #1
+  001F - 100007D1 - STORE 2001  ; mem[2001] <- AC
+  0020 - 080007D0 - LOAD 2000  ; AC <- mem[2000]
+  0021 - 180007D1 - ADD 2001  ; AC <- AC + mem[2001]
+  0022 - 100007D0 - STORE 2000  ; mem[2000] <- AC
+  0023 - 0A000001 - LOAD #1  ; AC <- #1
+  0024 - 10000898 - STORE 2200  ; mem[2200] <- AC
+  0025 - 080007D0 - LOAD 2000  ; AC <- mem[2000]
+  0026 - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC
+  0027 - 0A000000 - LOAD #0  ; AC <- #0
+  0028 - 10000898 - STORE 2200  ; mem[2200] <- AC
+  0029 - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]
+  002A - 100007D0 - STORE 2000  ; mem[2000] <- AC
+  002B - 0A000001 - LOAD #1  ; AC <- #1
+  002C - 100007D1 - STORE 2001  ; mem[2001] <- AC
+  002D - 080007D0 - LOAD 2000  ; AC <- mem[2000]
+  002E - 180007D1 - ADD 2001  ; AC <- AC + mem[2001]
+  002F - 100007D0 - STORE 2000  ; mem[2000] <- AC
+  0030 - 0A000000 - LOAD #0  ; AC <- #0
+  0031 - 10000898 - STORE 2200  ; mem[2200] <- AC
+  0032 - 080007D0 - LOAD 2000  ; AC <- mem[2000]
+  0033 - 14000898 - STORE @2200  ; mem[mem[2200]] <- AC
+  0034 - 0A000000 - LOAD #0  ; AC <- #0
+  0035 - 10000898 - STORE 2200  ; mem[2200] <- AC
+  0036 - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]
+  0037 - 100007D0 - STORE 2000  ; mem[2000] <- AC
+  0038 - 0A000030 - LOAD #48  ; AC <- #48
+  0039 - 100007D1 - STORE 2001  ; mem[2001] <- AC
+  003A - 080007D0 - LOAD 2000  ; AC <- mem[2000]
+  003B - 180007D1 - ADD 2001  ; AC <- AC + mem[2001]
+  003C - B8000001 - OUT 1  ; port[1] <- AC
+  003D - 0A000001 - LOAD #1  ; AC <- #1
+  003E - 10000898 - STORE 2200  ; mem[2200] <- AC
+  003F - 0C000898 - LOAD @2200  ; AC <- mem[mem[2200]]
+  0040 - 100007D0 - STORE 2000  ; mem[2000] <- AC
+  0041 - 0A000030 - LOAD #48  ; AC <- #48
+  0042 - 100007D1 - STORE 2001  ; mem[2001] <- AC
+  0043 - 080007D0 - LOAD 2000  ; AC <- mem[2000]
+  0044 - 180007D1 - ADD 2001  ; AC <- AC + mem[2001]
+  0045 - B8000001 - OUT 1  ; port[1] <- AC
+  0046 - C8000000 - HALT 0  ; stop
+  0047 - C8000000 - HALT 0  ; stop
+log: |-
+  tick=   1 | FETCH   | signal: INSTRUCTION_MEM_READ[1] = 0x0a000001 latch_IR <- 167772161                                                     | IP=   1 | IR=0x0a000001 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick=   2 | DECODE  | signal: IP_MUX(IP_INC) -> 2 latch_IP <- 2  decode: LOAD mode=IMM operand=1                                             | IP=   2 | IR=0x0a000001 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick=   3 | EXECUTE | signal: DR_MUX(IR_OPERAND) -> 1 latch_DR <- 1                                                                          | IP=   2 | IR=0x0a000001 | AC=         0 | AR=   0 | DR=         1 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick=   4 | EXECUTE | signal: AC_MUX(AC) -> 0 latch_AC <- 1                                                                                  | IP=   2 | IR=0x0a000001 | AC=         1 | AR=   0 | DR=         1 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick=   5 | FETCH   | signal: INSTRUCTION_MEM_READ[2] = 0x100007d0 latch_IR <- 268437456                                                     | IP=   2 | IR=0x100007d0 | AC=         1 | AR=   0 | DR=         1 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick=   6 | DECODE  | signal: IP_MUX(IP_INC) -> 3 latch_IP <- 3  decode: STORE mode=DIRECT operand=2000                                      | IP=   3 | IR=0x100007d0 | AC=         1 | AR=   0 | DR=         1 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick=   7 | EXECUTE | signal: latch_AC_AR <- 2000 set_AC_valid <- 1 STORE-MARK ac belongs [2000]                                             | IP=   3 | IR=0x100007d0 | AC=         1 | AR=   0 | DR=         1 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick=   8 | EXECUTE | signal: DR_MUX(AC) -> 1 latch_DR <- 1  | AR_MUX(ACS_AR) -> 0 latch_AR <- 0                                             | IP=   3 | IR=0x100007d0 | AC=         1 | AR=   0 | DR=         1 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick=   9 | EXECUTE | signal: AC_MUX(AC_SHADOW) -> 0 latch_AC <- 0  | ARS_MUX(AC_AR) -> 2000 latch_ACS_AR <- 2000 set_AC_valid <- 0 set_ACS_valid <- 1 | IP=   3 | IR=0x100007d0 | AC=         0 | AR=   0 | DR=         1 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  10 | EXECUTE | signal: latch_AC_SHADOW <- 1  | AR_MUX(AR) -> 0 latch_AC_AR <- 0 | SWAP done: ac/_ shadow/2000                         | IP=   3 | IR=0x100007d0 | AC=         0 | AR=   0 | DR=         1 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  11 | FETCH   | signal: INSTRUCTION_MEM_READ[3] = 0x0a000000 latch_IR <- 167772160                                                     | IP=   3 | IR=0x0a000000 | AC=         0 | AR=   0 | DR=         1 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  12 | DECODE  | signal: IP_MUX(IP_INC) -> 4 latch_IP <- 4  decode: LOAD mode=IMM operand=0                                             | IP=   4 | IR=0x0a000000 | AC=         0 | AR=   0 | DR=         1 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  13 | EXECUTE | signal: DR_MUX(IR_OPERAND) -> 0 latch_DR <- 0                                                                          | IP=   4 | IR=0x0a000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  14 | EXECUTE | signal: AC_MUX(AC) -> 0 latch_AC <- 0                                                                                  | IP=   4 | IR=0x0a000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  15 | FETCH   | signal: INSTRUCTION_MEM_READ[4] = 0x10000898 latch_IR <- 268437656                                                     | IP=   4 | IR=0x10000898 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  16 | DECODE  | signal: IP_MUX(IP_INC) -> 5 latch_IP <- 5  decode: STORE mode=DIRECT operand=2200                                      | IP=   5 | IR=0x10000898 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  17 | EXECUTE | signal: latch_AC_AR <- 2200 set_AC_valid <- 1 STORE-MARK ac belongs [2200]                                             | IP=   5 | IR=0x10000898 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  18 | EXECUTE | signal: DR_MUX(AC) -> 0 latch_DR <- 0  | AR_MUX(ACS_AR) -> 2000 latch_AR <- 2000                                       | IP=   5 | IR=0x10000898 | AC=         0 | AR=2000 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
+  tick=  19 | EXECUTE | signal: AC_MUX(AC_SHADOW) -> 1 latch_AC <- 1  | ARS_MUX(AC_AR) -> 2200 latch_ACS_AR <- 2200 set_AC_valid <- 1 set_ACS_valid <- 1 | IP=   5 | IR=0x10000898 | AC=         1 | AR=2000 | DR=         0 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick=  20 | EXECUTE | signal: latch_AC_SHADOW <- 0  | AR_MUX(AR) -> 2000 latch_AC_AR <- 2000 | SWAP done: ac/2000 shadow/2200                | IP=   5 | IR=0x10000898 | AC=         1 | AR=2000 | DR=         0 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  ... [пропущено 376 тактов] ...
+  tick= 397 | EXECUTE | signal: DEAD-LOAD [2000] (already in AC)                                                                               | IP=  68 | IR=0x080007d0 | AC=         3 | AR=2000 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 398 | FETCH   | signal: INSTRUCTION_MEM_READ[68] = 0x180007d1 latch_IR <- 402655185                                                    | IP=  68 | IR=0x180007d1 | AC=         3 | AR=2000 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 399 | DECODE  | signal: IP_MUX(IP_INC) -> 69 latch_IP <- 69  decode: ADD mode=DIRECT operand=2001                                      | IP=  69 | IR=0x180007d1 | AC=         3 | AR=2000 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 400 | EXECUTE | signal: AR_MUX(AC_AR) -> 2000 latch_AR <- 2000  | AC_MUX(AC) -> 3  | DR_MUX(ALU) -> 3 latch_DR <- 3                    | IP=  69 | IR=0x180007d1 | AC=         3 | AR=2000 | DR=         3 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 401 | EXECUTE | signal: MEM_WRITE[2000] = 3 set_AC_valid <- 0 | FLUSH ac done                                                          | IP=  69 | IR=0x180007d1 | AC=         3 | AR=2000 | DR=         3 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 402 | EXECUTE | signal: AR_MUX(ACS_AR) -> 2001 latch_AR <- 2001  | AC_MUX(AC_SHADOW) -> 48  | DR_MUX(ALU) -> 48 latch_DR <- 48         | IP=  69 | IR=0x180007d1 | AC=         3 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 403 | EXECUTE | signal: MEM_WRITE[2001] = 48 set_ACS_valid <- 0 | FLUSH shadow done                                                    | IP=  69 | IR=0x180007d1 | AC=         3 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 404 | EXECUTE | signal: AR_MUX(IR_OPERAND) -> 2001 latch_AR <- 2001                                                                    | IP=  69 | IR=0x180007d1 | AC=         3 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 405 | EXECUTE | signal: MEM_READ[2001] = 48  | DR_MUX(MEM) -> 48 latch_DR <- 48                                                        | IP=  69 | IR=0x180007d1 | AC=         3 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 406 | EXECUTE | signal: AC_MUX(AC) -> 3 latch_AC <- 51                                                                                 | IP=  69 | IR=0x180007d1 | AC=        51 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 407 | FETCH   | signal: INSTRUCTION_MEM_READ[69] = 0xb8000001 latch_IR <- 3087007745                                                   | IP=  69 | IR=0xb8000001 | AC=        51 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 408 | DECODE  | signal: IP_MUX(IP_INC) -> 70 latch_IP <- 70  decode: OUT mode=DIRECT operand=1                                         | IP=  70 | IR=0xb8000001 | AC=        51 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 409 | EXECUTE | signal: AC_MUX(AC) -> 51  | IO_WRITE port[1] = '3'                                                                     | IP=  70 | IR=0xb8000001 | AC=        51 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 410 | FETCH   | signal: INSTRUCTION_MEM_READ[70] = 0xc8000000 latch_IR <- 3355443200                                                   | IP=  70 | IR=0xc8000000 | AC=        51 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 411 | DECODE  | signal: IP_MUX(IP_INC) -> 71 latch_IP <- 71  decode: HALT mode=DIRECT operand=0                                        | IP=  71 | IR=0xc8000000 | AC=        51 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 412 | EXECUTE | signal:                                                                                                                | IP=  71 | IR=0xc8000000 | AC=        51 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 413 | EXECUTE | signal:                                                                                                                | IP=  71 | IR=0xc8000000 | AC=        51 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 414 | EXECUTE | signal:                                                                                                                | IP=  71 | IR=0xc8000000 | AC=        51 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 415 | EXECUTE | signal:                                                                                                                | IP=  71 | IR=0xc8000000 | AC=        51 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
+  tick= 416 | EXECUTE | signal: HALT (parallel flush done)                                                                                     | IP=  71 | IR=0xc8000000 | AC=        51 | AR=2001 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
