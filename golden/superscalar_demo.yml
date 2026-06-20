@@ -108,7 +108,7 @@ log: |-
   tick=  18 | EXECUTE | signal: MEM_WRITE[200] = 203                                                                                           | IP=   5 | IR=0x100000c8 | AC=       203 | AR= 200 | DR=       203 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=  19 | FETCH   | signal: INSTRUCTION_MEM_READ[5] = 0x08000000 latch_IR <- 134217728                                                     | IP=   5 | IR=0x08000000 | AC=       203 | AR= 200 | DR=       203 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=  20 | DECODE  | signal: IP_MUX(IP_INC) -> 6 latch_IP <- 6  decode: LOAD mode=DIRECT operand=0                                          | IP=   6 | IR=0x08000000 | AC=       203 | AR= 200 | DR=       203 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
-  ... [пропущено 307 тактов] ...
+  ... [skipped 307 ticks] ...
   tick= 328 | DECODE  | signal: IP_MUX(IP_INC) -> 67 latch_IP <- 67  decode: STORE mode=DIRECT operand=1                                       | IP=  67 | IR=0x10000001 | AC=        48 | AR=   0 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick= 329 | EXECUTE | signal: AR_MUX(IR_OPERAND) -> 1 latch_AR <- 1                                                                          | IP=  67 | IR=0x10000001 | AC=        48 | AR=   1 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick= 330 | EXECUTE | signal: AC_MUX(AC) -> 48  | DR_MUX(ALU) -> 48 latch_DR <- 48                                                           | IP=  67 | IR=0x10000001 | AC=        48 | AR=   1 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1

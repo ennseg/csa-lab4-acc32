@@ -45,7 +45,7 @@ def trim_log(lines):
     skipped = len(lines) - LOG_HEAD - LOG_TAIL
     head = lines[:LOG_HEAD]
     tail = lines[-LOG_TAIL:]
-    marker = f"... [пропущено {skipped} тактов] ..."
+    marker = f"... [skipped {skipped} ticks] ..."
     return head + [marker] + tail
 
 

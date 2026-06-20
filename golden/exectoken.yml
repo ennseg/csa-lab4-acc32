@@ -337,7 +337,7 @@ log: |-
   tick=  18 | EXECUTE | signal: DR_MUX(IR_OPERAND) -> 1 latch_DR <- 1                                                                          | IP= 191 | IR=0x0a000001 | AC=         0 | AR=   0 | DR=         1 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=  19 | EXECUTE | signal: AC_MUX(AC) -> 0 latch_AC <- 1                                                                                  | IP= 191 | IR=0x0a000001 | AC=         1 | AR=   0 | DR=         1 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=  20 | FETCH   | signal: INSTRUCTION_MEM_READ[191] = 0x10000000 latch_IR <- 268435456                                                   | IP= 191 | IR=0x10000000 | AC=         1 | AR=   0 | DR=         1 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
-  ... [пропущено 3610 тактов] ...
+  ... [skipped 3610 ticks] ...
   tick=3631 | EXECUTE | signal: DR_MUX(IR_OPERAND) -> -1 latch_DR <- -1                                                                        | IP= 170 | IR=0x0bffffff | AC=         0 | AR=   2 | DR=        -1 | SP=4093 | N=0 Z=1 V=0 C=0 IE=1
   tick=3632 | EXECUTE | signal: AC_MUX(AC) -> 0 latch_AC <- -1                                                                                 | IP= 170 | IR=0x0bffffff | AC=        -1 | AR=   2 | DR=        -1 | SP=4093 | N=1 Z=0 V=0 C=0 IE=1
   tick=3633 | FETCH   | signal: INSTRUCTION_MEM_READ[170] = 0x70000073 latch_IR <- 1879048307                                                  | IP= 170 | IR=0x70000073 | AC=        -1 | AR=   2 | DR=        -1 | SP=4093 | N=1 Z=0 V=0 C=0 IE=1

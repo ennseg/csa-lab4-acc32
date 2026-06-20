@@ -54,7 +54,7 @@ log: |-
   tick=  18 | FETCH   | signal: INSTRUCTION_MEM_READ[17] = 0x0a000000 latch_IR <- 167772160                                                    | IP=  17 | IR=0x0a000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
   tick=  19 | DECODE  | signal: IP_MUX(IP_INC) -> 18 latch_IP <- 18  decode: LOAD mode=IMM operand=0                                           | IP=  18 | IR=0x0a000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
   tick=  20 | EXECUTE | signal: DR_MUX(IR_OPERAND) -> 0 latch_DR <- 0                                                                          | IP=  18 | IR=0x0a000000 | AC=         0 | AR=   0 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
-  ... [пропущено 999960 тактов] ...
+  ... [skipped 999960 ticks] ...
   tick=999981 | EXECUTE | signal: DR_MUX(IR_OPERAND) -> 0 latch_DR <- 0                                                                          | IP=  18 | IR=0x0a000000 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
   tick=999982 | EXECUTE | signal: AC_MUX(AC) -> 0 latch_AC <- 0                                                                                  | IP=  18 | IR=0x0a000000 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
   tick=999983 | FETCH   | signal: INSTRUCTION_MEM_READ[18] = 0x70000011 latch_IR <- 1879048209                                                   | IP=  18 | IR=0x70000011 | AC=         0 | AR=4095 | DR=         0 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1

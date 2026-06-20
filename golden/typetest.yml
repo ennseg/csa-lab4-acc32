@@ -49,7 +49,7 @@ log: |-
   tick=  18 | DECODE  | signal: IP_MUX(IP_INC) -> 5 latch_IP <- 5  decode: STORE mode=DIRECT operand=1                                         | IP=   5 | IR=0x10000001 | AC=         5 | AR= 203 | DR=         5 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=  19 | EXECUTE | signal: AR_MUX(IR_OPERAND) -> 1 latch_AR <- 1                                                                          | IP=   5 | IR=0x10000001 | AC=         5 | AR=   1 | DR=         5 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=  20 | EXECUTE | signal: AC_MUX(AC) -> 5  | DR_MUX(ALU) -> 5 latch_DR <- 5                                                              | IP=   5 | IR=0x10000001 | AC=         5 | AR=   1 | DR=         5 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
-  ... [пропущено 291 тактов] ...
+  ... [skipped 291 ticks] ...
   tick= 312 | EXECUTE | signal: MEM_WRITE[2] = 5                                                                                               | IP=  19 | IR=0x10000002 | AC=         5 | AR=   2 | DR=         5 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick= 313 | FETCH   | signal: INSTRUCTION_MEM_READ[19] = 0x68000007 latch_IR <- 1744830471                                                   | IP=  19 | IR=0x68000007 | AC=         5 | AR=   2 | DR=         5 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick= 314 | DECODE  | signal: IP_MUX(IP_INC) -> 20 latch_IP <- 20  decode: JMP mode=DIRECT operand=7                                         | IP=  20 | IR=0x68000007 | AC=         5 | AR=   2 | DR=         5 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1

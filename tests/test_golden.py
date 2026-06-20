@@ -48,7 +48,7 @@ def _run(name, input_str, superscalar):
 
 @pytest.mark.parametrize("golden_file", GOLDEN_FILES, ids=lambda p: p.stem)
 def test_golden(golden_file):
-    with open(golden_file, encoding="utf-8-sig") as f:
+    with open(golden_file) as f:
         ref = yaml.safe_load(f)
 
     name = ref["name"][:-3] if ref["name"].endswith("_ss") else ref["name"]
