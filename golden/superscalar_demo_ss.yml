@@ -108,7 +108,7 @@ log: |-
   tick=  18 | EXECUTE | signal: DR_MUX(AC) -> 203 latch_DR <- 203  | AR_MUX(ACS_AR) -> 0 latch_AR <- 0                                         | IP=   5 | IR=0x100000c8 | AC=       203 | AR=   0 | DR=       203 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=  19 | EXECUTE | signal: AC_MUX(AC_SHADOW) -> 1 latch_AC <- 1  | ARS_MUX(AC_AR) -> 200 latch_ACS_AR <- 200 set_AC_valid <- 1 set_ACS_valid <- 1 | IP=   5 | IR=0x100000c8 | AC=         1 | AR=   0 | DR=       203 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=  20 | EXECUTE | signal: latch_AC_SHADOW <- 203  | AR_MUX(AR) -> 0 latch_AC_AR <- 0 | SWAP done: ac/0 shadow/200                        | IP=   5 | IR=0x100000c8 | AC=         1 | AR=   0 | DR=       203 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
-  ... [пропущено 376 тактов] ...
+  ... [skipped 376 ticks] ...
   tick= 397 | EXECUTE | signal: DEAD-LOAD [0] (already in AC)                                                                                  | IP=  68 | IR=0x08000000 | AC=         3 | AR=   0 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick= 398 | FETCH   | signal: INSTRUCTION_MEM_READ[68] = 0x18000001 latch_IR <- 402653185                                                    | IP=  68 | IR=0x18000001 | AC=         3 | AR=   0 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick= 399 | DECODE  | signal: IP_MUX(IP_INC) -> 69 latch_IP <- 69  decode: ADD mode=DIRECT operand=1                                         | IP=  69 | IR=0x18000001 | AC=         3 | AR=   0 | DR=        48 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1

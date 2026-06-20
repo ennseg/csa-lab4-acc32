@@ -4,7 +4,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 EXAMPLES_DIR = PROJECT_ROOT / "examples"
 BUILD_DIR = PROJECT_ROOT / "build"
 
-SUPERSCALAR = False
+SUPERSCALAR = True
 
 DATA_MEMORY_SIZE = 2**12
 

@@ -396,7 +396,7 @@ log: |-
   tick=  18 | EXECUTE | signal: AC_MUX(AC_SHADOW) -> 0 latch_AC <- 0  | ARS_MUX(AC_AR) -> 0 latch_ACS_AR <- 0 set_AC_valid <- 0 set_ACS_valid <- 1 | IP= 178 | IR=0x10000000 | AC=         0 | AR=   0 | DR=       100 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
   tick=  19 | EXECUTE | signal: latch_AC_SHADOW <- 100  | AR_MUX(AR) -> 0 latch_AC_AR <- 0 | SWAP done: ac/_ shadow/0                          | IP= 178 | IR=0x10000000 | AC=         0 | AR=   0 | DR=       100 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
   tick=  20 | FETCH   | signal: INSTRUCTION_MEM_READ[178] = 0x0a0000cb latch_IR <- 167772363                                                   | IP= 178 | IR=0x0a0000cb | AC=         0 | AR=   0 | DR=       100 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
-  ... [пропущено 56194 тактов] ...
+  ... [skipped 56194 ticks] ...
   tick=56215 | EXECUTE | signal:                                                                                                                | IP= 171 | IR=0x70000073 | AC=        -1 | AR=   2 | DR=        -1 | SP=4093 | N=1 Z=0 V=0 C=0 IE=1
   tick=56216 | FETCH   | signal: INSTRUCTION_MEM_READ[171] = 0xa8000000 latch_IR <- 2818572288                                                  | IP= 171 | IR=0xa8000000 | AC=        -1 | AR=   2 | DR=        -1 | SP=4093 | N=1 Z=0 V=0 C=0 IE=1
   tick=56217 | DECODE  | signal: IP_MUX(IP_INC) -> 172 latch_IP <- 172  decode: RET mode=DIRECT operand=0                                       | IP= 172 | IR=0xa8000000 | AC=        -1 | AR=   2 | DR=        -1 | SP=4093 | N=1 Z=0 V=0 C=0 IE=1

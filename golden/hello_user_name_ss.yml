@@ -270,7 +270,7 @@ log: |-
   tick=  18 | EXECUTE | signal: AC_MUX(AC) -> 104 latch_AC <- 97                                                                               | IP=   6 | IR=0x0a000061 | AC=        97 | AR=   0 | DR=        97 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=  19 | FETCH   | signal: INSTRUCTION_MEM_READ[6] = 0xb8000001 latch_IR <- 3087007745                                                    | IP=   6 | IR=0xb8000001 | AC=        97 | AR=   0 | DR=        97 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=  20 | DECODE  | signal: IP_MUX(IP_INC) -> 7 latch_IP <- 7  decode: OUT mode=DIRECT operand=1                                           | IP=   7 | IR=0xb8000001 | AC=        97 | AR=   0 | DR=        97 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
-  ... [пропущено 3728 тактов] ...
+  ... [skipped 3728 ticks] ...
   tick=3749 | FETCH   | signal: INSTRUCTION_MEM_READ[166] = 0x10000000 latch_IR <- 268435456                                                   | IP= 166 | IR=0x10000000 | AC=        -1 | AR=   2 | DR=        -1 | SP=4091 | N=1 Z=0 V=0 C=0 IE=0 [IRQ]
   tick=3750 | DECODE  | signal: IP_MUX(IP_INC) -> 167 latch_IP <- 167  decode: STORE mode=DIRECT operand=0                                     | IP= 167 | IR=0x10000000 | AC=        -1 | AR=   2 | DR=        -1 | SP=4091 | N=1 Z=0 V=0 C=0 IE=0 [IRQ]
   tick=3751 | EXECUTE | signal: latch_AC_AR <- 0 set_AC_valid <- 1 STORE-MARK ac belongs [0]                                                   | IP= 167 | IR=0x10000000 | AC=        -1 | AR=   2 | DR=        -1 | SP=4091 | N=1 Z=0 V=0 C=0 IE=0 [IRQ]

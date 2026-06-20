@@ -49,7 +49,7 @@ log: |-
   tick=  18 | EXECUTE | signal: MEM_READ[200] = 203  | DR_MUX(MEM) -> 203 latch_DR <- 203                                                      | IP=   4 | IR=0x0c0000c8 | AC=         0 | AR= 200 | DR=       203 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
   tick=  19 | EXECUTE | signal: AR_MUX(DR) -> 203 latch_AR <- 203                                                                              | IP=   4 | IR=0x0c0000c8 | AC=         0 | AR= 203 | DR=       203 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
   tick=  20 | EXECUTE | signal: MEM_READ[203] = 5  | DR_MUX(MEM) -> 5 latch_DR <- 5                                                            | IP=   4 | IR=0x0c0000c8 | AC=         0 | AR= 203 | DR=         5 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
-  ... [пропущено 376 тактов] ...
+  ... [skipped 376 ticks] ...
   tick= 397 | EXECUTE | signal: latch_AC_SHADOW <- 208  | AR_MUX(AR) -> 2 latch_AC_AR <- 2 | SWAP done: ac/2 shadow/_                          | IP=   8 | IR=0x08000002 | AC=         5 | AR=   2 | DR=       208 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick= 398 | FETCH   | signal: INSTRUCTION_MEM_READ[8] = 0x60000001 latch_IR <- 1610612737                                                    | IP=   8 | IR=0x60000001 | AC=         5 | AR=   2 | DR=       208 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick= 399 | DECODE  | signal: IP_MUX(IP_INC) -> 9 latch_IP <- 9  decode: CMP mode=DIRECT operand=1                                           | IP=   9 | IR=0x60000001 | AC=         5 | AR=   2 | DR=       208 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1

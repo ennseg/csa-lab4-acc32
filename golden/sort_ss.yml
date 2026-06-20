@@ -547,7 +547,7 @@ log: |-
   tick=  18 | EXECUTE | signal: AC_MUX(AC_SHADOW) -> 0 latch_AC <- 0  | ARS_MUX(AC_AR) -> 0 latch_ACS_AR <- 0 set_AC_valid <- 0 set_ACS_valid <- 1 | IP= 178 | IR=0x10000000 | AC=         0 | AR=   0 | DR=         5 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
   tick=  19 | EXECUTE | signal: latch_AC_SHADOW <- 5  | AR_MUX(AR) -> 0 latch_AC_AR <- 0 | SWAP done: ac/_ shadow/0                            | IP= 178 | IR=0x10000000 | AC=         0 | AR=   0 | DR=         5 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
   tick=  20 | FETCH   | signal: INSTRUCTION_MEM_READ[178] = 0x0a0000d0 latch_IR <- 167772368                                                   | IP= 178 | IR=0x0a0000d0 | AC=         0 | AR=   0 | DR=         5 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
-  ... [пропущено 17685 тактов] ...
+  ... [skipped 17685 ticks] ...
   tick=17706 | EXECUTE | signal: AR_MUX(IR_OPERAND) -> 1 latch_AR <- 1                                                                          | IP= 435 | IR=0x60000001 | AC=         5 | AR=   1 | DR=         5 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=17707 | EXECUTE | signal: MEM_READ[1] = 5  | DR_MUX(MEM) -> 5 latch_DR <- 5                                                              | IP= 435 | IR=0x60000001 | AC=         5 | AR=   1 | DR=         5 | SP=4095 | N=0 Z=0 V=0 C=0 IE=1
   tick=17708 | EXECUTE | signal: AC_MUX(AC) -> 5                                                                                                | IP= 435 | IR=0x60000001 | AC=         5 | AR=   1 | DR=         5 | SP=4095 | N=0 Z=1 V=0 C=0 IE=1
