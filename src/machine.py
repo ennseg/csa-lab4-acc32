@@ -23,7 +23,7 @@ class DataPath:
         self.ACS_AR = 0
         self.AC_valid = 0
         self.ACS_valid = 0
-        self.SR = {"N": 0, "Z": 0, "V": 0, "C": 0, "IE": 1}
+        self.SR = {"N": 0, "Z": 0, "V": 0, "C": 0}
         self.SP = config.STACK_TOP
 
         self.instruction_memory, data_section = self.load_program(program)
@@ -112,6 +112,7 @@ class ControlUnit:
         self.tick = 0
         self.state = "FETCH"
         self.exec_step = 0
+        self.IE = 1
         self.opcode = 0
         self.mode = 0
         self.operand = 0
@@ -139,7 +140,7 @@ class ControlUnit:
             done = self.execute()
 
             if done:
-                self.exec_step = 0
+                self.latch_step(self.step_mux(0))
                 self.state = "FETCH"
 
         self.write_log(current_state)
@@ -160,14 +161,14 @@ class ControlUnit:
             f"mode={isa.MODE_NAMES.get(self.mode, '???')} operand={self.operand}"
         )
         self.exec_plan = self.build_plan()
-        self.exec_step = 0
+        self.latch_step(self.step_mux(0))
 
     def execute(self):
         step_ = self.exec_plan[self.exec_step]
         if step_ is not None:
             step_()
 
-        self.exec_step += 1
+        self.latch_step(self.step_mux("STEP_INC"))
 
         return self.exec_step >= len(self.exec_plan)
 
@@ -520,7 +521,7 @@ class ControlUnit:
                 lambda: self.latch_AR(self.ar_mux("SP")),
                 lambda: self.latch_DR(self.dr_mux("MEM")),
                 lambda: self.latch_IP(self.ip_mux("DR")),
-                lambda: self.latch_SR("IE", 1),
+                lambda: self.latch_IE(self.ie_mux(1)),
             ]
 
         if op == isa.HALT:
@@ -661,8 +662,30 @@ class ControlUnit:
     def latch_SR(self, key, value):
         self.dp.SR[key] = value
 
+    def ie_mux(self, sel):
+        if sel == 0:
+            return 0
+        if sel == 1:
+            return 1
+        raise ValueError(f"Unknown IE_MUX sel: {sel}")
+
+    def latch_IE(self, value):
+        self.IE = value
+
+    def step_mux(self, sel):
+        if sel == 0:
+            return 0
+        if sel == 1:
+            return 1
+        if sel == "STEP_INC":
+            return self.exec_step + 1
+        raise ValueError(f"Unknown STEP_MUX sel: {sel}")
+
+    def latch_step(self, value):
+        self.exec_step = value
+
     def unpack_SR(self, value):
-        self.dp.SR["IE"] = (value >> 4) & 1
+        self.IE = (value >> 4) & 1
         self.dp.SR["N"] = (value >> 3) & 1
         self.dp.SR["Z"] = (value >> 2) & 1
         self.dp.SR["V"] = (value >> 1) & 1
@@ -717,7 +740,7 @@ class ControlUnit:
             result = self.dp.AC
         elif sel == "SR":
             s = self.dp.SR
-            result = (s["IE"] << 4) | (s["N"] << 3) | (s["Z"] << 2) | (s["V"] << 1) | s["C"]
+            result = (self.IE << 4) | (s["N"] << 3) | (s["Z"] << 2) | (s["V"] << 1) | s["C"]
         else:
             raise ValueError(f"Unknown DR_MUX sel: {sel}")
 
@@ -810,12 +833,12 @@ class ControlUnit:
                 self.IRQ = 1
                 self.cu_signal += f" | IRQ_SET port[{isa.PORT_STDIN}]='{char}' "
 
-        if self.IRQ and self.dp.SR["IE"] and self.state == "FETCH":
-            self.latch_SR("IE", 0)
+        if self.IRQ and self.IE and self.state == "FETCH":
+            self.latch_IE(self.ie_mux(0))
             self.IRQ = 0
 
             self.exec_plan = self.build_irq_plan()
-            self.exec_step = 0
+            self.latch_step(self.step_mux(0))
             self.state = "EXECUTE"
             self.cu_signal += " | IRQ_ENTER: IE=0, IP saved, jump to vector "
 
@@ -880,7 +903,7 @@ class ControlUnit:
             self.cu_signal += f" | IO_WRITE port[{port}] = {value} "
 
     def write_log(self, state):
-        irq_mark = " [IRQ]" if not self.dp.SR["IE"] else ""
+        irq_mark = " [IRQ]" if not self.IE else ""
 
         sig = self.cu_signal.strip().strip("|").strip()
         sig = sig.replace("\x00", "\\0")
@@ -896,7 +919,7 @@ class ControlUnit:
             f"DR={self.dp.DR:10d} | "
             f"SP={self.dp.SP:4d} | "
             f"N={self.dp.SR['N']} Z={self.dp.SR['Z']} V={self.dp.SR['V']} "
-            f"C={self.dp.SR['C']} IE={self.dp.SR['IE']}"
+            f"C={self.dp.SR['C']} IE={self.IE}"
             f"{irq_mark}"
         )
         self.log.append(entry)
